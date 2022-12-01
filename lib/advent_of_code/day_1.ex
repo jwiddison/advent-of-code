@@ -44,7 +44,6 @@ defmodule AdventOfCode.Day1 do
     @path_to_input
     |> File.read!()
     |> String.split("\n\n")
-    |> Enum.drop(-1)
     |> Enum.map(&parse_and_sum_list/1)
   end
 
