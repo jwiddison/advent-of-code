@@ -3,7 +3,7 @@ defmodule AdventOfCodeTest do
 
   alias AdventOfCode.Day1
   alias AdventOfCode.Day2
-  # alias AdventOfCode.Day3
+  alias AdventOfCode.Day3
   # alias AdventOfCode.Day4
   # alias AdventOfCode.Day5
   # alias AdventOfCode.Day6
@@ -29,7 +29,7 @@ defmodule AdventOfCodeTest do
 
   doctest Day1
   doctest Day2
-  # doctest Day3
+  doctest Day3
   # doctest Day4
   # doctest Day5
   # doctest Day6
