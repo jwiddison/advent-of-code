@@ -17,7 +17,24 @@ defmodule AdventOfCode.Day3 do
     rucksacks = get_rucksacks()
 
     rucksacks
-    |> Enum.map(&find_and_prioritize_mismatch/1)
+    |> Enum.map(&find_and_prioritize_item/1)
+    |> Enum.sum()
+  end
+
+  @doc """
+  Examples:
+
+      iex> Day3.part_2()
+      2_479
+
+  """
+  @spec part_2() :: integer
+  def part_2() do
+    rucksacks = get_rucksacks()
+
+    rucksacks
+    |> Enum.chunk_every(3)
+    |> Enum.map(&find_and_prioritize_group_badge/1)
     |> Enum.sum()
   end
 
@@ -25,35 +42,37 @@ defmodule AdventOfCode.Day3 do
   # Private
   ################################################################################
 
-  @spec find_and_prioritize_mismatch(String.t()) :: integer
-  def find_and_prioritize_mismatch(rucksack_string) do
+  @spec find_and_prioritize_item(String.t()) :: integer
+  defp find_and_prioritize_item(rucksack_string) do
     half_size =
       rucksack_string
       |> String.length()
-      |> Kernel./(2)
-      |> Kernel.trunc()
+      |> div(2)
 
-    {first_half, second_half} =
-      rucksack_string
-      |> String.graphemes()
-      |> Enum.split(half_size)
+    {half_1, half_2} = String.split_at(rucksack_string, half_size)
 
-    first_half_set = MapSet.new(first_half)
-    second_half_set = MapSet.new(second_half)
+    set_1 = string_to_mapset(half_1)
+    set_2 = string_to_mapset(half_2)
 
-    mismatch =
-      first_half_set
-      |> MapSet.intersection(second_half_set)
-      |> Enum.to_list()
-      |> hd()
+    set_1
+    |> MapSet.intersection(set_2)
+    |> Enum.to_list()
+    |> hd()
+    |> priority_for_letter()
+  end
 
-    <<ascii_num::utf8>> = mismatch
+  @spec find_and_prioritize_group_badge(list(String.t())) :: integer
+  def find_and_prioritize_group_badge([elf_1, elf_2, elf_3]) do
+    set_1 = string_to_mapset(elf_1)
+    set_2 = string_to_mapset(elf_2)
+    set_3 = string_to_mapset(elf_3)
 
-    if String.downcase(mismatch) == mismatch do
-      ascii_num - 96
-    else
-      ascii_num - 38
-    end
+    set_1
+    |> MapSet.intersection(set_2)
+    |> MapSet.intersection(set_3)
+    |> Enum.to_list()
+    |> hd()
+    |> priority_for_letter()
   end
 
   @spec get_rucksacks() :: list(String.t())
@@ -62,5 +81,23 @@ defmodule AdventOfCode.Day3 do
     |> Inputs.read_file()
     |> String.split("\n")
     |> Enum.drop(-1)
+  end
+
+  @spec priority_for_letter(letter :: String.t()) :: priority :: integer
+  defp priority_for_letter(letter) do
+    <<ascii_num::utf8>> = letter
+
+    if String.downcase(letter) == letter do
+      ascii_num - 96
+    else
+      ascii_num - 38
+    end
+  end
+
+  @spec string_to_mapset(String.t()) :: MapSet.t()
+  defp string_to_mapset(string) do
+    string
+    |> String.graphemes()
+    |> MapSet.new()
   end
 end
