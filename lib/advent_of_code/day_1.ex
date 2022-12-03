@@ -3,7 +3,7 @@ defmodule AdventOfCode.Day1 do
   Advent of Code 2022, Day 1: Thursday December 1
   https://adventofcode.com/2022/day/1
   """
-  @path_to_input "lib/advent_of_code/day_1/day_1_input.txt"
+  alias AdventOfCode.Inputs
 
   @doc """
   Examples:
@@ -41,8 +41,8 @@ defmodule AdventOfCode.Day1 do
 
   @spec build_list_of_totals() :: list(integer)
   defp build_list_of_totals() do
-    @path_to_input
-    |> File.read!()
+    1
+    |> Inputs.read_file()
     |> String.split("\n\n")
     |> Enum.map(&parse_and_sum_list/1)
   end

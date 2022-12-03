@@ -3,7 +3,7 @@ defmodule AdventOfCode.Day2 do
   Advent of Code 2022, Day 2: Friday December 2
   https://adventofcode.com/2022/day/2
   """
-  @path_to_input "lib/advent_of_code/day_2/day_2_input.txt"
+  alias AdventOfCode.Inputs
 
   @opponent_rock "A"
   @opponent_paper "B"
@@ -95,8 +95,8 @@ defmodule AdventOfCode.Day2 do
 
   @spec get_list_of_matches() :: list(String.t())
   defp get_list_of_matches() do
-    @path_to_input
-    |> File.read!()
+    2
+    |> Inputs.read_file()
     |> String.split("\n")
     |> Enum.drop(-1)
     |> Enum.map(&String.split(&1, " "))
