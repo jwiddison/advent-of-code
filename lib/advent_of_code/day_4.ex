@@ -75,7 +75,7 @@ defmodule AdventOfCode.Day4 do
     |> Enum.drop(-1)
   end
 
-  @spec map_assignment(String.t()) :: list
+  @spec map_assignment(String.t()) :: list(MapSet.t())
   defp map_assignment(assignments_string) do
     assignments_string
     |> String.split(",")
