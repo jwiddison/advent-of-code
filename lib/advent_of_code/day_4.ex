@@ -9,7 +9,7 @@ defmodule AdventOfCode.Day4 do
   Examples:
 
       iex> Day4.part_1()
-      0
+      490
 
   """
   @spec part_1() :: integer
@@ -25,7 +25,7 @@ defmodule AdventOfCode.Day4 do
   Examples:
 
       iex> Day4.part_2()
-      490
+      921
 
   """
   @spec part_2() :: integer
@@ -33,6 +33,7 @@ defmodule AdventOfCode.Day4 do
     assignments = get_assignments()
 
     assignments
+    |> Enum.filter(&assignments_intersect?/1)
     |> Enum.count()
   end
 
@@ -42,18 +43,26 @@ defmodule AdventOfCode.Day4 do
 
   @spec assignment_to_mapset(String.t()) :: MapSet.t()
   defp assignment_to_mapset(assignment_string) do
-    [left, right] = String.split(assignment_string, "-")
-    {left_int, _rem} = Integer.parse(left)
-    {right_int, _rem} = Integer.parse(right)
-    MapSet.new(left_int..right_int)
+    assignment_string
+    |> String.replace("-", "..")
+    |> Code.eval_string()
+    |> elem(0)
+    |> MapSet.new()
+  end
+
+  @spec assignments_intersect?(String.t()) :: boolean
+  def assignments_intersect?(assignment) do
+    [set_one, set_two] = map_assignment(assignment)
+
+    set_one
+    |> MapSet.intersection(set_two)
+    |> MapSet.size()
+    |> Kernel.>(0)
   end
 
   @spec assignments_overlap?(String.t()) :: boolean
-  defp assignments_overlap?(assignment_string) do
-    [one, two] = String.split(assignment_string, ",")
-
-    set_one = assignment_to_mapset(one)
-    set_two = assignment_to_mapset(two)
+  defp assignments_overlap?(assignment) do
+    [set_one, set_two] = map_assignment(assignment)
 
     MapSet.subset?(set_one, set_two) || MapSet.subset?(set_two, set_one)
   end
@@ -64,5 +73,12 @@ defmodule AdventOfCode.Day4 do
     |> Inputs.read_file()
     |> String.split("\n")
     |> Enum.drop(-1)
+  end
+
+  @spec map_assignment(String.t()) :: list
+  defp map_assignment(assignments_string) do
+    assignments_string
+    |> String.split(",")
+    |> Enum.map(&assignment_to_mapset/1)
   end
 end
