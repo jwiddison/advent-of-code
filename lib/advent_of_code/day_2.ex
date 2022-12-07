@@ -97,8 +97,7 @@ defmodule AdventOfCode.Day2 do
   defp get_list_of_matches() do
     2
     |> Inputs.read_file()
-    |> String.split("\n")
-    |> Enum.drop(-1)
+    |> String.split("\n", trim: true)
     |> Enum.map(&String.split(&1, " "))
   end
 end

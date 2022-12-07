@@ -71,8 +71,7 @@ defmodule AdventOfCode.Day4 do
   defp get_assignments() do
     4
     |> Inputs.read_file()
-    |> String.split("\n")
-    |> Enum.drop(-1)
+    |> String.split("\n", trim: true)
   end
 
   @spec map_assignment(String.t()) :: list(MapSet.t())

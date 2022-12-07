@@ -79,8 +79,7 @@ defmodule AdventOfCode.Day3 do
   defp get_rucksacks() do
     3
     |> Inputs.read_file()
-    |> String.split("\n")
-    |> Enum.drop(-1)
+    |> String.split("\n", trim: true)
   end
 
   @spec priority_for_letter(letter :: String.t()) :: priority :: integer
