@@ -1,6 +1,5 @@
 defmodule AdventOfCode.Day6 do
   @moduledoc """
-  Advent of Code 2022, Day 6: Tuesday December 6
   https://adventofcode.com/2022/day/6
   """
   alias AdventOfCode.Inputs

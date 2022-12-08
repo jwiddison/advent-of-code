@@ -1,6 +1,5 @@
 defmodule AdventOfCode.Day2 do
   @moduledoc """
-  Advent of Code 2022, Day 2: Friday December 2
   https://adventofcode.com/2022/day/2
   """
   alias AdventOfCode.Inputs
@@ -32,12 +31,12 @@ defmodule AdventOfCode.Day2 do
   @doc """
   Examples:
 
-      iex> Day2.get_total_score_part_1()
+      iex> Day2.part_1()
       14_264
 
   """
-  @spec get_total_score_part_1() :: integer
-  def get_total_score_part_1() do
+  @spec part_1() :: integer
+  def part_1() do
     list_of_matches = get_list_of_matches()
 
     list_of_matches
@@ -48,12 +47,12 @@ defmodule AdventOfCode.Day2 do
   @doc """
   Examples:
 
-      iex> Day2.get_total_score_part_2()
+      iex> Day2.part_2()
       12_382
 
   """
-  @spec get_total_score_part_2() :: integer
-  def get_total_score_part_2() do
+  @spec part_2() :: integer
+  def part_2() do
     list_of_matches = get_list_of_matches()
 
     list_of_matches
