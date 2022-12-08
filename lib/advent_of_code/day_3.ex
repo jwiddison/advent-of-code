@@ -1,6 +1,5 @@
 defmodule AdventOfCode.Day3 do
   @moduledoc """
-  Advent of Code 2022, Day 3: Saturday December 3
   https://adventofcode.com/2022/day/3
   """
   alias AdventOfCode.Inputs

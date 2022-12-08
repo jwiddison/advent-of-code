@@ -1,6 +1,5 @@
 defmodule AdventOfCode.Day1 do
   @moduledoc """
-  Advent of Code 2022, Day 1: Thursday December 1
   https://adventofcode.com/2022/day/1
   """
   alias AdventOfCode.Inputs
@@ -8,12 +7,12 @@ defmodule AdventOfCode.Day1 do
   @doc """
   Examples:
 
-      iex> Day1.get_max()
+      iex> Day1.part_1()
       iex> 72_017
 
   """
-  @spec get_max() :: integer
-  def get_max() do
+  @spec part_1() :: integer
+  def part_1() do
     list_of_totals = build_list_of_totals()
     Enum.max(list_of_totals)
   end
@@ -21,12 +20,12 @@ defmodule AdventOfCode.Day1 do
   @doc """
   Examples:
 
-      iex> Day1.sum_top_three()
+      iex> Day1.part_3()
       iex> 212_520
 
   """
-  @spec sum_top_three() :: integer
-  def sum_top_three() do
+  @spec part_3() :: integer
+  def part_3() do
     list_of_totals = build_list_of_totals()
 
     list_of_totals
