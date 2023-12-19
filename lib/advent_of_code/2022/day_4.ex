@@ -1,4 +1,4 @@
-defmodule AdventOfCode.Day4 do
+defmodule AdventOfCode.2022.Day4 do
   @moduledoc """
   https://adventofcode.com/2022/day/4
   """
@@ -69,7 +69,7 @@ defmodule AdventOfCode.Day4 do
   @spec get_assignments() :: list(String.t())
   defp get_assignments() do
     4
-    |> Inputs.read_file()
+    |> Inputs.read_file("2022")
     |> String.split("\n", trim: true)
   end
 

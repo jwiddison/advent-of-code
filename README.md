@@ -1,3 +1,3 @@
 # AdventOfCode
 
-Advent of Code 2022, in Elixir
+Advent of Code, in Elixir

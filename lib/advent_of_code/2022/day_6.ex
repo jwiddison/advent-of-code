@@ -1,4 +1,4 @@
-defmodule AdventOfCode.Day6 do
+defmodule AdventOfCode.2022.Day6 do
   @moduledoc """
   https://adventofcode.com/2022/day/6
   """
@@ -61,5 +61,5 @@ defmodule AdventOfCode.Day6 do
   end
 
   @spec get_sequence() :: String.t()
-  defp get_sequence(), do: Inputs.read_file(6)
+  defp get_sequence(), do: Inputs.read_file(6, "2022")
 end

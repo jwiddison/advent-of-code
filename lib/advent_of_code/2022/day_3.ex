@@ -1,4 +1,4 @@
-defmodule AdventOfCode.Day3 do
+defmodule AdventOfCode.2022.Day3 do
   @moduledoc """
   https://adventofcode.com/2022/day/3
   """
@@ -77,7 +77,7 @@ defmodule AdventOfCode.Day3 do
   @spec get_rucksacks() :: list(String.t())
   defp get_rucksacks() do
     3
-    |> Inputs.read_file()
+    |> Inputs.read_file("2022")
     |> String.split("\n", trim: true)
   end
 
