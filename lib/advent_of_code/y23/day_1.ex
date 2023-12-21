@@ -15,7 +15,7 @@ defmodule AdventOfCode.Y23.Day1 do
     "nineight" => "98"
   }
 
-  @string_nums %{
+  @word_nums %{
     "one" => "1",
     "two" => "2",
     "three" => "3",
@@ -36,10 +36,12 @@ defmodule AdventOfCode.Y23.Day1 do
   """
   @spec part_1() :: integer
   def part_1() do
-    input = get_input()
+    inputs = get_input()
 
-    Enum.reduce(input, 0, fn str, acc ->
-      acc + sum_first_and_last_digit(str)
+    Enum.reduce(inputs, 0, fn str, acc ->
+      str
+      |> parse_first_and_last_digit()
+      |> Kernel.+(acc)
     end)
   end
 
@@ -52,36 +54,20 @@ defmodule AdventOfCode.Y23.Day1 do
   """
   @spec part_2() :: integer
   def part_2() do
-    input = get_input()
+    inputs = get_input()
 
-    Enum.reduce(input, 0, fn str, acc ->
-      clean_str =
-        str
-        |> cleanup_words(@combinations)
-        |> cleanup_words(@string_nums)
-
-      acc + sum_first_and_last_digit(clean_str)
+    Enum.reduce(inputs, 0, fn str, acc ->
+      str
+      |> words_to_digits(@combinations)
+      |> words_to_digits(@word_nums)
+      |> parse_first_and_last_digit()
+      |> Kernel.+(acc)
     end)
   end
 
   ################################################################################
   # Private
   ################################################################################
-
-  @spec cleanup_words(String.t(), map) :: String.t()
-  defp cleanup_words(str, words_to_digits_map) do
-    Enum.reduce(words_to_digits_map, str, fn {words, digits}, acc ->
-      String.replace(acc, words, digits)
-    end)
-  end
-
-  @spec concat_and_parse_strings(String.t(), String.t()) :: integer
-  defp concat_and_parse_strings(str_1, str_2) do
-    str_1
-    |> Kernel.<>(str_2)
-    |> Integer.parse()
-    |> elem(0)
-  end
 
   @spec get_input() :: list(String.t())
   defp get_input() do
@@ -90,22 +76,23 @@ defmodule AdventOfCode.Y23.Day1 do
     |> String.split("\n", trim: true)
   end
 
-  @spec sum_first_and_last_digit(String.t()) :: integer
-  defp sum_first_and_last_digit(str) do
-    # Clean out any non-digit characters
+  @spec parse_first_and_last_digit(String.t()) :: integer
+  defp parse_first_and_last_digit(str) do
     clean = String.replace(str, ~r/\D/, "")
 
-    case String.length(clean) do
-      1 ->
-        # If it's only one character, that character is BOTH the first and last digit
-        concat_and_parse_strings(clean, clean)
+    first = String.first(clean)
+    last = String.last(clean)
 
-      _longer_than_one ->
-        # I'm sure there's a better way to grab a string's first and last chars
-        first = String.first(clean)
-        last = String.last(clean)
+    first
+    |> Kernel.<>(last)
+    |> Integer.parse()
+    |> elem(0)
+  end
 
-        concat_and_parse_strings(first, last)
-    end
+  @spec words_to_digits(String.t(), map) :: String.t()
+  defp words_to_digits(str, words_to_digits_map) do
+    Enum.reduce(words_to_digits_map, str, fn {words, digits}, acc ->
+      String.replace(acc, words, digits)
+    end)
   end
 end
