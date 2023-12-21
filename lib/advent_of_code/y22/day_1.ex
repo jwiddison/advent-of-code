@@ -1,4 +1,4 @@
-defmodule AdventOfCode.2022.Day1 do
+defmodule AdventOfCode.Y22.Day1 do
   @moduledoc """
   https://adventofcode.com/2022/day/1
   """
@@ -8,7 +8,7 @@ defmodule AdventOfCode.2022.Day1 do
   Examples:
 
       iex> Day1.part_1()
-      iex> 72_017
+      72_017
 
   """
   @spec part_1() :: integer
@@ -21,7 +21,7 @@ defmodule AdventOfCode.2022.Day1 do
   Examples:
 
       iex> Day1.part_3()
-      iex> 212_520
+      212_520
 
   """
   @spec part_3() :: integer
@@ -41,7 +41,7 @@ defmodule AdventOfCode.2022.Day1 do
   @spec build_list_of_totals() :: list(integer)
   defp build_list_of_totals() do
     1
-    |> Inputs.read_file("2022")
+    |> Inputs.read_file("Y22")
     |> String.split("\n\n")
     |> Enum.map(&parse_and_sum_list/1)
   end
