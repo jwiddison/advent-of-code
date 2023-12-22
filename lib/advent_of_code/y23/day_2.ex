@@ -49,19 +49,15 @@ defmodule AdventOfCode.Y23.Day2 do
   def part_1() do
     input = get_input()
 
-    actual = %RGB{red: 12, green: 13, blue: 14}
+    # Requirements from the problem
+    max_required = %RGB{red: 12, green: 13, blue: 14}
 
     Enum.reduce(input, 0, fn game, acc ->
       ["Game " <> game_number, game_text] = String.split(game, ": ")
 
-      max_draws =
-        game_text
-        |> String.replace(" ", "")
-        |> String.replace(";", ",")
-        |> String.split(",")
-        |> get_max_draws()
+      rgb_counts = get_counts(game_text)
 
-      if RGB.draws_are_possible?(max_draws, actual) do
+      if RGB.draws_are_possible?(rgb_counts, max_required) do
         game_number
         |> Integer.parse()
         |> elem(0)
@@ -72,22 +68,47 @@ defmodule AdventOfCode.Y23.Day2 do
     end)
   end
 
+  @doc """
+  Examples:
+
+      iex> Day2.part_2()
+      56_580
+
+  """
+  @spec part_2() :: integer
+  def part_2() do
+    input = get_input()
+
+    Enum.reduce(input, 0, fn game, acc ->
+      [_game_number, game_text] = String.split(game, ": ")
+
+      %RGB{red: red, green: green, blue: blue} = get_counts(game_text)
+      power = red * green * blue
+
+      acc + power
+    end)
+  end
+
   ################################################################################
   # Private
   ################################################################################
+
+  @spec get_counts(String.t()) :: RGB.t()
+  defp get_counts(game_string) do
+    game_string
+    |> String.replace(" ", "")
+    |> String.replace(";", ",")
+    |> String.split(",")
+    |> Enum.reduce(RGB.new(), fn new_draw, acc ->
+      {count, color} = Integer.parse(new_draw)
+      RGB.merge(acc, color, count)
+    end)
+  end
 
   @spec get_input() :: list(String.t())
   defp get_input() do
     2
     |> Inputs.read_file("Y23")
     |> String.split("\n", trim: true)
-  end
-
-  @spec get_max_draws(list(String.t())) :: RGB.t()
-  defp get_max_draws(list_of_draws) do
-    Enum.reduce(list_of_draws, RGB.new(), fn new_draw, acc ->
-      {count, color} = Integer.parse(new_draw)
-      RGB.merge(acc, color, count)
-    end)
   end
 end
