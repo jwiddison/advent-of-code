@@ -3,7 +3,9 @@ defmodule AdventOfCode.Y23Test do
 
   alias AdventOfCode.Y23.Day1
   alias AdventOfCode.Y23.Day2
+  alias AdventOfCode.Y23.Day3
 
   doctest Day1
   doctest Day2
+  doctest Day3
 end
