@@ -37,7 +37,7 @@ defmodule AdventOfCode.Y23.Day4 do
       5_920_640
 
   """
-  @spec part_2() :: integer()
+  @spec part_2() :: integer
   def part_2() do
     length = length(@input)
 
