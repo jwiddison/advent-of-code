@@ -2,7 +2,7 @@ defmodule AdventOfCode.Y23.Day2 do
   @moduledoc """
   https://adventofcode.com/2023/day/2
   """
-  alias AdventOfCode.Inputs
+  alias AdventOfCode.Helpers
 
   defmodule RGB do
     @moduledoc false
@@ -59,8 +59,7 @@ defmodule AdventOfCode.Y23.Day2 do
 
       if RGB.draws_are_possible?(rgb_counts, max_required) do
         game_number
-        |> Integer.parse()
-        |> elem(0)
+        |> Helpers.unsafe_string_to_integer()
         |> Kernel.+(acc)
       else
         acc
@@ -108,7 +107,7 @@ defmodule AdventOfCode.Y23.Day2 do
   @spec get_input() :: list(String.t())
   defp get_input() do
     2
-    |> Inputs.read_file("Y23")
+    |> Helpers.read_file("Y23")
     |> String.split("\n", trim: true)
   end
 end

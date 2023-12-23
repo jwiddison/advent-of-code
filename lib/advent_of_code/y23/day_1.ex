@@ -2,7 +2,7 @@ defmodule AdventOfCode.Y23.Day1 do
   @moduledoc """
   https://adventofcode.com/2023/day/1
   """
-  alias AdventOfCode.Inputs
+  alias AdventOfCode.Helpers
 
   @combinations %{
     "oneight" => "18",
@@ -72,7 +72,7 @@ defmodule AdventOfCode.Y23.Day1 do
   @spec get_input() :: list(String.t())
   defp get_input() do
     1
-    |> Inputs.read_file("Y23")
+    |> Helpers.read_file("Y23")
     |> String.split("\n", trim: true)
   end
 
@@ -85,8 +85,7 @@ defmodule AdventOfCode.Y23.Day1 do
 
     first
     |> Kernel.<>(last)
-    |> Integer.parse()
-    |> elem(0)
+    |> Helpers.unsafe_string_to_integer()
   end
 
   @spec words_to_digits(String.t(), map) :: String.t()

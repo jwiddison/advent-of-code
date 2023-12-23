@@ -2,7 +2,7 @@ defmodule AdventOfCode.Y22.Day4 do
   @moduledoc """
   https://adventofcode.com/2022/day/4
   """
-  alias AdventOfCode.Inputs
+  alias AdventOfCode.Helpers
 
   @doc """
   Examples:
@@ -69,7 +69,7 @@ defmodule AdventOfCode.Y22.Day4 do
   @spec get_assignments() :: list(String.t())
   defp get_assignments() do
     4
-    |> Inputs.read_file("Y22")
+    |> Helpers.read_file("Y22")
     |> String.split("\n", trim: true)
   end
 

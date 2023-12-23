@@ -2,7 +2,7 @@ defmodule AdventOfCode.Y22.Day7 do
   @moduledoc """
   https://adventofcode.com/2022/day/7
   """
-  alias AdventOfCode.Inputs
+  alias AdventOfCode.Helpers
 
   @type command :: String.t()
   @type path :: list
@@ -50,7 +50,7 @@ defmodule AdventOfCode.Y22.Day7 do
   @spec get_commands() :: list(command)
   defp get_commands() do
     7
-    |> Inputs.read_file("Y22")
+    |> Helpers.read_file("Y22")
     |> String.split("\n", trim: true)
   end
 

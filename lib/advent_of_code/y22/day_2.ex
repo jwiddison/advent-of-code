@@ -2,7 +2,7 @@ defmodule AdventOfCode.Y22.Day2 do
   @moduledoc """
   https://adventofcode.com/2022/day/2
   """
-  alias AdventOfCode.Inputs
+  alias AdventOfCode.Helpers
 
   @opponent_rock "A"
   @opponent_paper "B"
@@ -95,7 +95,7 @@ defmodule AdventOfCode.Y22.Day2 do
   @spec get_list_of_matches() :: list(String.t())
   defp get_list_of_matches() do
     2
-    |> Inputs.read_file("Y22")
+    |> Helpers.read_file("Y22")
     |> String.split("\n", trim: true)
     |> Enum.map(&String.split(&1, " "))
   end
