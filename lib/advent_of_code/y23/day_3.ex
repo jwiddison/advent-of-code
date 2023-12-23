@@ -1,8 +1,9 @@
 defmodule AdventOfCode.Y23.Day3 do
   @moduledoc """
   https://adventofcode.com/2023/day/3
+
+  Honestly, Day 3 didn't seem like an interesting problem so we're skipping it.
   """
-  alias AdventOfCode.Inputs
 
   @doc """
   Examples:
@@ -12,19 +13,5 @@ defmodule AdventOfCode.Y23.Day3 do
 
   """
   @spec part_1() :: integer
-  def part_1() do
-    _input = get_input()
-    1
-  end
-
-  ################################################################################
-  # Private
-  ################################################################################
-
-  @spec get_input() :: list(String.t())
-  defp get_input() do
-    3
-    |> Inputs.read_file("Y23")
-    |> String.split("\n", trim: true)
-  end
+  def part_1(), do: 1
 end
