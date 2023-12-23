@@ -3,6 +3,13 @@ defmodule AdventOfCode.Helpers do
   Helper for reading the input files
   """
 
+  @spec get_input_as_list(keyword) :: list(String.t())
+  def get_input_as_list(year: year, day: day) do
+    day
+    |> read_file(year)
+    |> String.split("\n", trim: true)
+  end
+
   @spec read_file(day_number :: integer, year :: String.t()) :: file_contents :: binary
   def read_file(day_number, year) do
     file = "lib/advent_of_code/#{year}/inputs/#{day_number}.txt"

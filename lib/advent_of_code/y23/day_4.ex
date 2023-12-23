@@ -3,8 +3,9 @@ defmodule AdventOfCode.Y23.Day4 do
   https://adventofcode.com/2023/day/4
   """
   alias AdventOfCode.Helpers
-
   alias String.Break
+
+  @input Helpers.get_input_as_list(year: "Y23", day: 4)
 
   @doc """
   Examples:
@@ -15,9 +16,7 @@ defmodule AdventOfCode.Y23.Day4 do
   """
   @spec part_1() :: integer
   def part_1() do
-    input = get_input()
-
-    Enum.reduce(input, 0, fn card, total_score ->
+    Enum.reduce(@input, 0, fn card, total_score ->
       [_card_number, numbers] = String.split(card, ":")
       num_matches = count_matches(numbers)
 
@@ -40,10 +39,10 @@ defmodule AdventOfCode.Y23.Day4 do
   """
   @spec part_2() :: integer()
   def part_2() do
-    input = get_input()
-    length = length(input)
+    length = length(@input)
 
-    Enum.reduce(input, %{}, fn card, map ->
+    @input
+    |> Enum.reduce(%{}, fn card, map ->
       ["Card" <> card_number, numbers] = String.split(card, ":")
       num_matches = count_matches(numbers)
 
@@ -87,13 +86,6 @@ defmodule AdventOfCode.Y23.Day4 do
     winning_set
     |> MapSet.intersection(my_set)
     |> Enum.count()
-  end
-
-  @spec get_input() :: list(String.t())
-  defp get_input() do
-    4
-    |> Helpers.read_file("Y23")
-    |> String.split("\n", trim: true)
   end
 
   @spec maybe_award_duplicate_cards(map, integer, integer, integer) :: map
