@@ -14,18 +14,18 @@ defmodule AdventOfCode.Y23.Day5 do
   @spec part_1() :: integer
   def part_1() do
     [
-      "seeds: " <> seeds,
-      "seed-to-soil map:\n" <> seed_to_soil_map,
-      "soil-to-fertilizer map:\n" <> soil_to_fertilzer_map,
-      "fertilizer-to-water map:\n" <> fertilizer_to_water_map,
-      "water-to-light map:\n" <> water_to_light_map,
-      "light-to-temperature map:\n" <> light_to_temperature_map,
-      "temperature-to-humidity map:\n" <> temperature_to_humidity_map,
-      "humidity-to-location map:\n" <> humidity_to_location_map
+      "seeds: " <> _seeds,
+      "seed-to-soil map:\n" <> _seed_to_soil_map,
+      "soil-to-fertilizer map:\n" <> _soil_to_fertilzer_map,
+      "fertilizer-to-water map:\n" <> _fertilizer_to_water_map,
+      "water-to-light map:\n" <> _water_to_light_map,
+      "light-to-temperature map:\n" <> _light_to_temperature_map,
+      "temperature-to-humidity map:\n" <> _temperature_to_humidity_map,
+      "humidity-to-location map:\n" <> _humidity_to_location_map
     ] = get_input()
 
-    require IEx
-    IEx.pry()
+    # require IEx
+    # IEx.pry()
 
     1
   end
