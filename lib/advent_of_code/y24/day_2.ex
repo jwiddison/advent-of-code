@@ -13,11 +13,12 @@ defmodule AdventOfCode.Y24.Day2 do
   """
   @spec part_1() :: integer
   def part_1() do
-    parsed = parse_input()
+    _parsed = parse_input()
 
-    Enum.reduce(parsed, 0, fn _row, _acc ->
-      nil
-    end)
+    # Enum.reduce(parsed, 0, fn row, acc ->
+    #   IO.inspect(row)
+    #   acc
+    # end)
 
     1
   end
