@@ -8,19 +8,16 @@ defmodule AdventOfCode.Y24.Day2 do
   Examples:
 
       iex> Day2.part_1()
-      1
+      326
 
   """
   @spec part_1() :: integer
   def part_1() do
-    _parsed = parse_input()
+    input = parse_input()
 
-    # Enum.reduce(parsed, 0, fn row, acc ->
-    #   IO.inspect(row)
-    #   acc
-    # end)
-
-    1
+    Enum.count(input, fn row ->
+      is_ordered(row) && gaps_right_size(row)
+    end)
   end
 
   @doc """
@@ -39,11 +36,21 @@ defmodule AdventOfCode.Y24.Day2 do
   # Private
   ################################################################################
 
-  # @spec check_increasing_or_decreasing(list) :: boolean
-  # defp check_increasing_or_decreasing(list) do
-  #   list == Enum.sort(list, :asc) ||
-  #     list == Enum.sort(list, :desc)
-  # end
+  @spec is_ordered(list) :: boolean
+  defp is_ordered(list) do
+    list == Enum.sort(list, :asc) ||
+      list == Enum.sort(list, :desc)
+  end
+
+  @spec gaps_right_size(list) :: boolean
+  defp gaps_right_size(list) do
+    list
+    |> Enum.chunk_every(2, 1, :discard)
+    |> Enum.all?(fn [a, b] ->
+      diff = abs(a - b)
+      diff > 0 && diff < 4
+    end)
+  end
 
   @spec get_input() :: list
   defp get_input() do
