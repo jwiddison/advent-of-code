@@ -14,36 +14,51 @@ defmodule AdventOfCode.Y24.Day2 do
   @spec part_1() :: integer
   def part_1() do
     input = parse_input()
-
-    Enum.count(input, fn row ->
-      is_ordered(row) && gaps_right_size(row)
-    end)
+    Enum.count(input, &safe?/1)
   end
 
   @doc """
   Examples:
 
       iex> Day2.part_2()
-      2
+      381
 
   """
   @spec part_2() :: integer
   def part_2() do
-    2
+    input = parse_input()
+
+    Enum.count(input, fn row ->
+      safe?(row) || safe_with_one_removed?(row)
+    end)
   end
 
   ################################################################################
   # Private
   ################################################################################
 
-  @spec is_ordered(list) :: boolean
-  defp is_ordered(list) do
-    list == Enum.sort(list, :asc) ||
-      list == Enum.sort(list, :desc)
+  @spec safe?(list) :: boolean
+  defp safe?(row) do
+    ordered?(row) && gaps_right_size?(row)
   end
 
-  @spec gaps_right_size(list) :: boolean
-  defp gaps_right_size(list) do
+  @spec safe_with_one_removed?(list) :: boolean
+  defp safe_with_one_removed?(row) do
+    0..(length(row) - 1)
+    |> Enum.any?(fn index ->
+      row
+      |> List.delete_at(index)
+      |> safe?()
+    end)
+  end
+
+  @spec ordered?(list) :: boolean
+  defp ordered?(list) do
+    list == Enum.sort(list, :asc) || list == Enum.sort(list, :desc)
+  end
+
+  @spec gaps_right_size?(list) :: boolean
+  defp gaps_right_size?(list) do
     list
     |> Enum.chunk_every(2, 1, :discard)
     |> Enum.all?(fn [a, b] ->
