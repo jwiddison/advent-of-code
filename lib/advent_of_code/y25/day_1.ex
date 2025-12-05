@@ -22,6 +22,40 @@ defmodule AdventOfCode.Y25.Day1 do
     |> elem(1)
   end
 
+  @doc """
+  Examples:
+
+      iex> Day1.part_2()
+      6_295
+
+  """
+  @spec part_2() :: integer
+  def part_2() do
+    get_input()
+    |> Enum.reduce({50, 0}, fn new_move, {previous_position, zero_count} ->
+      # check for full rotatitions first
+      zero_count = zero_count + abs(div(new_move, 100))
+
+      # check if current rotation goes past zero, but didn't start at 0
+      after_full_rotations = rem(new_move, 100)
+      new_position_before_mod = previous_position + after_full_rotations
+
+      zero_count =
+        if previous_position != 0 && (new_position_before_mod > 100 || new_position_before_mod < 0) do
+          zero_count + 1
+        else
+          zero_count
+        end
+
+      # check if we landed on zero
+      new_position = Integer.mod(new_position_before_mod, 100)
+      zero_count = if new_position == 0, do: zero_count + 1, else: zero_count
+
+      {new_position, zero_count}
+    end)
+    |> elem(1)
+  end
+
   ################################################################################
   # Private
   ################################################################################
