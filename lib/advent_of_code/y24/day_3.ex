@@ -13,8 +13,8 @@ defmodule AdventOfCode.Y24.Day3 do
   """
   @spec part_1() :: integer
   def part_1() do
-    input = get_input()
-    IO.inspect(input)
+    _input = get_input()
+    # IO.inspect(input)
     1
   end
 
@@ -34,7 +34,6 @@ defmodule AdventOfCode.Y24.Day3 do
   # Private
   ################################################################################
 
-  @spec get_input() :: list
   defp get_input() do
     3
     |> Helpers.read_file("Y24")
